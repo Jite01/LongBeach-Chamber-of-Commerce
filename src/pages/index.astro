@@ -12,10 +12,285 @@ Any page or data can be rebuilt only when needed, without site visitors ever get
 ---
 
 <Layout title="Welcome to Astro.">
-    <ContextAlert class="mb-8" />
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+    <!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Long Beach Chamber — Showcase</title>
+  <meta name="description" content="Long Beach Chamber of Commerce — events, members, advocacy, and local business resources." />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#0ea5a4; --accent-2:#7c3aed; --glass: rgba(255,255,255,0.03);
+      --radius:14px; --max:1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #08121b 75%);color:#e6eef6}
+    a{color:var(--accent)}
+    header{backdrop-filter: blur(6px);position:sticky;top:0;z-index:40;background:linear-gradient(180deg,rgba(2,6,23,0.55),rgba(2,6,23,0.35));padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav a{margin-left:14px;color:var(--muted);text-decoration:none;font-weight:600}
+    .container{max-width:var(--max);margin:28px auto;padding:0 18px}/* Hero */
+.hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+.heroCard{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:28px;border-radius:var(--radius);box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+.small{color:var(--muted);font-weight:600;margin-bottom:10px}
+h1{font-size:36px;margin:0 0 12px}
+p.lead{color:var(--muted);line-height:1.5;margin:0 0 18px}
+.cta{display:inline-flex;gap:10px}
+.btn{background:var(--accent);border:none;padding:12px 18px;border-radius:10px;color:#022;cursor:pointer;font-weight:700}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+/* Stats */
+.stats{display:flex;gap:12px;margin-top:16px}
+.stat{background:var(--glass);padding:12px;border-radius:10px;min-width:110px;text-align:center}
+.stat strong{display:block;font-size:20px}
+.stat small{color:var(--muted)}
+
+/* Visualizer */
+.visual{background:linear-gradient(180deg,#071126,rgba(7,17,38,0.2));padding:18px;border-radius:12px;display:flex;flex-direction:column;gap:10px}
+canvas{width:100%;height:260px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+
+/* Sections */
+section{margin-top:20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px}
+.card h4{margin:6px 0}
+footer{margin:40px 0;text-align:center;color:var(--muted)}
+
+/* responsive */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  canvas{height:200px}
+}
+
+/* small utils */
+.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
+.muted{color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">LB</div>
+      <div>
+        <div style="font-weight:800">Long Beach Chamber</div>
+        <div class="muted" style="font-size:12px">Local business advocacy & events</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#members">Members</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>  <main class="container">
+    <div class="hero">
+      <div class="heroCard">
+        <div class="small">Welcome to</div>
+        <h1>Long Beach Chamber — Community, Commerce, Connection</h1>
+        <p class="lead">A modern showcase for local businesses, events and membership — with visual tools to explore members, upcoming events, and community impact.</p><div class="cta">
+      <button class="btn" id="joinBtn">Join the Chamber</button>
+      <button class="btn ghost" id="eventsBtn">See Events</button>
+    </div>
+
+    <div class="stats" aria-hidden>
+      <div class="stat"><strong id="stat-members">452</strong><small>Members</small></div>
+      <div class="stat"><strong id="stat-events">12</strong><small>Upcoming Events</small></div>
+      <div class="stat"><strong id="stat-impact">$1.2M</strong><small>Economic Impact</small></div>
+    </div>
+
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <span class="pill">Business Resources</span>
+      <span class="pill">Advocacy</span>
+      <span class="pill">Networking</span>
+    </div>
+  </div>
+
+  <aside class="visual">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <strong>Member Map</strong>
+      <small class="muted">Interactive</small>
+    </div>
+    <canvas id="viz"></canvas>
+    <div class="muted" style="font-size:12px">Hover points for details • Use filters below</div>
+
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <select id="industryFilter" aria-label="Industry filter">
+        <option value="all">All industries</option>
+        <option value="retail">Retail</option>
+        <option value="service">Service</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="tech">Tech</option>
+      </select>
+      <input id="searchMember" placeholder="Search member" style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+    </div>
+  </aside>
+</div>
+
+<section id="about">
+  <div class="card">
+    <h3>About Us</h3>
+    <p class="muted">We support Long Beach businesses with advocacy, events, and member services. Our mission is to foster a thriving local economy where small and medium businesses succeed.</p>
+  </div>
+</section>
+
+<section id="events">
+  <h3 style="margin-top:18px">Upcoming Events</h3>
+  <div class="cards" id="eventsList">
+    <!-- JS will populate events -->
+  </div>
+</section>
+
+<section id="members">
+  <h3 style="margin-top:18px">Featured Members</h3>
+  <div class="cards" id="membersList">
+    <!-- JS will populate members -->
+  </div>
+</section>
+
+<section id="contact">
+  <h3 style="margin-top:18px">Contact & Join</h3>
+  <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-top:12px">
+    <form class="card" data-netlify="true" name="contact" id="contactForm">
+      <input type="hidden" name="form-name" value="contact" />
+      <label class="muted">Name<input name="name" required style="width:100%;margin-top:6px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" /></label>
+      <label class="muted" style="margin-top:8px">Email<input name="email" required style="width:100%;margin-top:6px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" /></label>
+      <label class="muted" style="margin-top:8px">Message<textarea name="message" rows="4" style="width:100%;margin-top:6px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea></label>
+      <div style="margin-top:12px"><button class="btn" type="submit">Send</button></div>
+    </form>
+
+    <div class="card">
+      <h4>Join as a member</h4>
+      <p class="muted">Membership benefits include event discounts, promotion on our site, and access to member-only resources.</p>
+      <ul class="muted">
+        <li>Monthly networking events</li>
+        <li>Listing on member directory</li>
+        <li>Policy & advocacy updates</li>
+      </ul>
+      <div style="margin-top:12px"><button class="btn" id="joinNow">Get Started</button></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="muted">Built for Long Beach Chamber — demo site • &copy; <span id="year"></span></p>
+</footer>
+
+  </main>  <script>
+    // Basic data model (placeholder). Replace with real API calls or Netlify Functions.
+    const members = [
+      {id:1,name:'Oceanview Cafe',industry:'restaurant',lat:33.770,lon:-118.193,desc:'Family-owned cafe'},
+      {id:2,name:'Harbor Hardware',industry:'retail',lat:33.771,lon:-118.190,desc:'Tools & supplies'},
+      {id:3,name:'Seaside Tech',industry:'tech',lat:33.768,lon:-118.200,desc:'IT services'},
+      {id:4,name:'Green People',industry:'service',lat:33.772,lon:-118.192,desc:'Landscaping & design'},
+      {id:5,name:'Boardwalk Books',industry:'retail',lat:33.774,lon:-118.191,desc:'Indie bookstore'}
+    ];
+
+    const events = [
+      {id:1,title:'Small Biz Networking',when:'Oct 15, 2025',loc:'Harborfront Hall'},
+      {id:2,title:'Annual Awards Gala',when:'Nov 8, 2025',loc:'Civic Center'},
+      {id:3,title:'Lunch & Learn: Social Media',when:'Dec 4, 2025',loc:'Downtown Workshop'}
+    ];
+
+    // populate lists
+    const membersList = document.getElementById('membersList');
+    const eventsList = document.getElementById('eventsList');
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+
+    function renderMembers(list){
+      membersList.innerHTML = '';
+      list.forEach(m=>{
+        const el = document.createElement('div'); el.className='card';
+        el.innerHTML = `<h4>${m.name}</h4><div class="muted">${m.industry}</div><p class="muted">${m.desc}</p>`;
+        membersList.appendChild(el);
+      });
+    }
+
+    function renderEvents(list){
+      eventsList.innerHTML = '';
+      list.forEach(e=>{
+        const el = document.createElement('div'); el.className='card';
+        el.innerHTML = `<h4>${e.title}</h4><div class="muted">${e.when} • ${e.loc}</div>`;
+        eventsList.appendChild(el);
+      });
+    }
+
+    renderMembers(members);
+    renderEvents(events);
+
+    // Simple canvas visualizer: plots normalized member points
+    const canvas = document.getElementById('viz');
+    const ctx = canvas.getContext('2d');
+    function resize(){
+      canvas.width = canvas.clientWidth * devicePixelRatio;
+      canvas.height = canvas.clientHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      draw();
+    }
+    window.addEventListener('resize', resize);
+
+    function draw(){
+      const w = canvas.clientWidth; const h = canvas.clientHeight;
+      ctx.clearRect(0,0,w,h);
+      // background grid
+      ctx.fillStyle='rgba(255,255,255,0.02)';
+      for(let i=0;i<10;i++){
+        ctx.fillRect(i*(w/10),0,1,h);
+      }
+      // map bounding box from lat/lon (quick normalization)
+      const lats = members.map(m=>m.lat); const lons = members.map(m=>m.lon);
+      const minLat=Math.min(...lats), maxLat=Math.max(...lats);
+      const minLon=Math.min(...lons), maxLon=Math.max(...lons);
+      members.forEach(m=>{
+        const nx = (m.lon - minLon)/(maxLon-minLon);
+        const ny = 1 - (m.lat - minLat)/(maxLat-minLat);
+        const x = 20 + nx*(w-40);
+        const y = 20 + ny*(h-40);
+        ctx.beginPath(); ctx.arc(x,y,8,0,Math.PI*2);
+        ctx.fillStyle = '#7c3aed'; ctx.fill();
+        ctx.fillStyle = 'rgba(0,0,0,0.15)'; ctx.fillText(m.name,x+12,y+4);
+      });
+    }
+
+    resize();
+
+    // filters
+    document.getElementById('industryFilter').addEventListener('change',e=>{
+      const v=e.target.value;
+      const filtered = v==='all'?members:members.filter(m=>m.industry===v);
+      renderMembers(filtered);
+    });
+
+    document.getElementById('searchMember').addEventListener('input',e=>{
+      const q=e.target.value.toLowerCase();
+      renderMembers(members.filter(m=>m.name.toLowerCase().includes(q)));
+    });
+
+    // form handler (Netlify will catch it if deployed). Local demo prevents redirect.
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      const data = new FormData(contactForm);
+      // Demo UX
+      alert('Thanks — message captured (demo). In production Netlify will handle this form or you can wire an API.')
+      contactForm.reset();
+    });
+
+    // quick CTA handlers
+    document.getElementById('joinBtn').addEventListener('click', ()=>document.querySelector('#contact input[name="name"]').focus());
+    document.getElementById('eventsBtn').addEventListener('click', ()=>location.hash='#events');
+    document.getElementById('joinNow').addEventListener('click', ()=>location.hash='#contact');
+
+    // accessibility: keyboard focus styles
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Tab') document.body.classList.add('show-focus'); });
+  </script></body>
+</html>
 </Layout>
+
+
+
