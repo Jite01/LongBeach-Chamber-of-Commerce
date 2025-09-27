@@ -1,4 +1,3 @@
-cat > src/pages/index.astro <<'EOF'
 ---
 import Layout from '../layouts/Layout.astro';
 ---
@@ -12,62 +11,22 @@ import Layout from '../layouts/Layout.astro';
       --accent: #38bdf8;
       --radius: 14px;
       --max: 1100px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: linear-gradient(180deg,#071020,#0f172a); color: white; }
+    body { margin: 0; background: linear-gradient(180deg, var(--bg) 0%, var(--card) 100%); }
     a { color: var(--accent); }
-    header { padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; }
+    header { padding: 18px 22px; display: flex; align-items: center; }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .logo { width: 44px; height: 44px; border-radius: 10px; background: var(--accent); }
+    .logo { width: 44px; height: 44px; border-radius: var(--radius); }
     nav a { margin-left: 14px; color: var(--muted); text-decoration: none; }
     nav a:hover { color: white; }
-    .container { max-width: var(--max); margin: 28px auto; padding: 0 22px; }
-    .hero { display: grid; grid-template-columns: 1fr 420px; gap: 32px; align-items: center; }
-    .heroCard { background: var(--card); padding: 28px; border-radius: var(--radius); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
-    .small { color: var(--muted); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
-    h1 { font-size: 36px; margin: 0 0 12px; }
-    p.lead { color: var(--muted); line-height: 1.5; margin: 0 0 18px; font-size: 18px; }
-    .btn { background: var(--accent); border: none; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; color: #0f172a; }
-    .btn:hover { opacity: 0.9; }
-    .btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; }
-    .stats { display: flex; gap: 12px; margin-top: 16px; }
-    .stat { background: var(--card); padding: 12px 16px; border-radius: 8px; font-size: 14px; }
+    .container { max-width: var(--max); margin: 28px auto; }
   </style>
-
-  <header>
-    <div class="brand">
-      <div class="logo"></div>
-      <span>Long Beach Chamber</span>
-    </div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Events</a>
-      <a href="#">Members</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div>
-        <p class="small">Welcome</p>
-        <h1>Growing Business in Long Beach</h1>
-        <p class="lead">The Long Beach Chamber of Commerce helps local businesses connect, grow, and succeed with networking, events, and advocacy.</p>
-        <button class="btn">Join Now</button>
-        <button class="btn ghost">Learn More</button>
-        <div class="stats">
-          <div class="stat">500+ Members</div>
-          <div class="stat">100+ Events</div>
-          <div class="stat">Serving since 1930</div>
-        </div>
-      </div>
-      <div class="heroCard">
-        <h3>Upcoming Event</h3>
-        <p>Business Networking Mixer — October 10th, 2025</p>
-        <button class="btn">Register</button>
-      </div>
-    </section>
-  </main>
+  
+  <!-- Your page content here -->
+  <div class="container">
+    <h1>Welcome to Long Beach Chamber</h1>
+    <!-- Add your content -->
+  </div>
 </Layout>
-EOF
